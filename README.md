@@ -1,2 +1,2 @@
 # cli-chess
-Play chess on the command line
+Play chess using the command line

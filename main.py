@@ -1,12 +1,15 @@
-from setup import generate_board, instantiate_pieces
+from setup import generate_board, instantiate_pieces, instantiate_players
 
 
 def main():
+    # Instantiate players
+    white, black = instantiate_players()
+
     # Instantiate pieces
-    white_pieces, black_pieces = instantiate_pieces()
+    instantiate_pieces(white, black)
 
     # Generate chess board
-    board = generate_board(white_pieces, black_pieces)
+    board = generate_board(white, black)
 
     # Print board
     for row in board:
