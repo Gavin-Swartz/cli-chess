@@ -1,5 +1,8 @@
 class Piece:
-    def __init__(self, posX, posY, player):
+    def __init__(self, posX, posY):
         self.posX = posX
         self.posY = posY
-        self.player = player
+
+    def move(self, newX, newY):
+        self.posX = newX
+        self.posY = newY
