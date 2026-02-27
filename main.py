@@ -2,7 +2,7 @@ from turn_utils import get_position_from_algebraic_notation, validate_command
 from player import Player
 from pieces.piece import Piece
 from setup import instantiate_pieces, instantiate_players
-from board import display_board, generate_board, on_board
+from board import display_board, generate_board, get_piece_at_square, on_board
     
 
 def handle_turn(player: Player) -> bool:
@@ -26,16 +26,12 @@ def handle_turn(player: Player) -> bool:
         return False
     
     # Get piece at target square
-    selected_piece = Piece(-1, -1, True)    # Will always be invalid, used as placeholder
-    for piece in player.pieces:
-        if (piece.posX == origin_col) and (piece.posY == origin_row) and not piece.captured:
-            selected_piece = piece
-            print(f'Piece found: {piece.rep}')
-
+    selected_piece = get_piece_at_square(player.pieces, origin_col, origin_row)
     if selected_piece.captured:
         print('No valid piece at square. Try again.')
         return False
     else:
+        # Move piece
         selected_piece.move(target_col, target_row)
         return True
 
@@ -52,7 +48,7 @@ def main():
     game_state = True
     while game_state:
         for player in [white, black]:
-            # Print board
+            # Print board at beginning of every player's turn
             display_board(board)
 
             # Get user input

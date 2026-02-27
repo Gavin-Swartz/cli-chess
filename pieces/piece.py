@@ -4,6 +4,6 @@ class Piece:
         self.posY = posY
         self.captured = captured
 
-    def move(self, newX, newY):
+    def move(self, newX: int, newY: int):
         self.posX = newX
         self.posY = newY

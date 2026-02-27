@@ -1,3 +1,6 @@
+from typing import List
+
+from pieces.piece import Piece
 from player import Player
 
 # Map column letters to index value
@@ -22,7 +25,7 @@ def display_board(board):
         print(row)
 
 
-def on_board(x, y):
+def on_board(x: int, y: int) -> bool:
     upper = 7
     lower = 0
 
@@ -36,6 +39,16 @@ def get_col_letters():
     return col_letters
 
 
-def get_column_index_from_alpha_char(letter):
+def get_piece_at_square(pieces: List[Piece], x: int, y: int) -> Piece:
+    selected_piece = Piece(-1, -1, True)    # Will always be invalid, used as placeholder
+    for piece in pieces:
+        if (piece.posX == x) and (piece.posY == y) and not piece.captured:
+            selected_piece = piece
+            print(f'Piece found: {piece.rep}')
+
+    return selected_piece
+
+
+def get_column_index_from_alpha_char(letter) -> int:
     letter = letter.upper()
     return col_letters[letter]
