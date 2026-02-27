@@ -44,7 +44,6 @@ def get_piece_at_square(pieces: List[Piece], x: int, y: int) -> Piece:
     for piece in pieces:
         if (piece.posX == x) and (piece.posY == y) and not piece.captured:
             selected_piece = piece
-            print(f'Piece found: {piece.rep}')
 
     return selected_piece
 

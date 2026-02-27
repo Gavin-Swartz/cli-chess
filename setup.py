@@ -38,7 +38,7 @@ def instantiate_pieces(white: Player, black: Player):
 
 
 def instantiate_players():
-    white = Player('w', 0)
-    black = Player('b', 1)
+    white = Player('w')
+    black = Player('b')
 
     return white, black

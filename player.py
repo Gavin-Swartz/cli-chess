@@ -2,7 +2,6 @@ from pieces.piece import Piece
 
 
 class Player():
-    def __init__(self, color_char, id):
+    def __init__(self, color_char: str):
         self.color = color_char
-        self.id = id
         self.pieces : Piece = []

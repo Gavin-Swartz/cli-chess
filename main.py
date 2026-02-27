@@ -30,6 +30,10 @@ def handle_turn(player: Player) -> bool:
     if selected_piece.captured:
         print('No valid piece at square. Try again.')
         return False
+    # Ensure move is valid for piece type
+    elif not selected_piece.valid_move(origin_col, origin_row, target_col, target_row, player.color):
+        print('Invalid move. Try again.')
+        return False
     else:
         # Move piece
         selected_piece.move(target_col, target_row)
