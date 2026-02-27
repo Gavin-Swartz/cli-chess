@@ -1,6 +1,5 @@
 from turn_utils import get_position_from_algebraic_notation, validate_command
 from player import Player
-from pieces.piece import Piece
 from setup import instantiate_pieces, instantiate_players
 from board import display_board, generate_board, get_piece_at_square, on_board
     
@@ -21,11 +20,12 @@ def handle_turn(player: Player) -> bool:
     target_col, target_row = get_position_from_algebraic_notation(target)
 
     # Verify target square is valid
-    if not on_board(target_col, target_row):
+    target_piece = get_piece_at_square(player.pieces, target_col, target_row)   # Ensure no piece from the same player is at the target square
+    if not on_board(target_col, target_row) or not target_piece.captured:
         print('Target square is invalid. Try again.')
         return False
     
-    # Get piece at target square
+    # Get piece at origin square
     selected_piece = get_piece_at_square(player.pieces, origin_col, origin_row)
     if selected_piece.captured:
         print('No valid piece at square. Try again.')
