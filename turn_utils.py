@@ -8,7 +8,7 @@ def validate_command(parsed_command: List[str]) -> bool:
         return False
     for arg in parsed_command:
         # Each argument in command should have 2 characters: the first a letter between A and H and the second a numeric digit
-        if (len(arg) != 2) or not (arg[0] in get_col_letters()) or not (arg[1].isdigit()):
+        if (len(arg) != 2) or not (arg[0].upper() in get_col_letters()) or not (arg[1].isdigit()):
             return False
     return True
 

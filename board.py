@@ -1,5 +1,4 @@
 from typing import List
-
 from pieces.piece import Piece
 from player import Player
 
@@ -15,7 +14,8 @@ def generate_board(white: Player, black: Player):
     # Fill board with pieces
     for player in [white, black]:
         for piece in player.pieces:
-            board[piece.posY][piece.posX] = player.color + piece.rep
+            if not piece.captured:
+                board[piece.y][piece.x] = player.color + piece.rep
 
     return board
 
@@ -42,7 +42,7 @@ def get_col_letters():
 def get_piece_at_square(pieces: List[Piece], x: int, y: int) -> Piece:
     selected_piece = Piece(-1, -1, True)    # Will always be invalid, used as placeholder
     for piece in pieces:
-        if (piece.posX == x) and (piece.posY == y) and not piece.captured:
+        if (piece.x == x) and (piece.y == y) and not piece.captured:
             selected_piece = piece
 
     return selected_piece
