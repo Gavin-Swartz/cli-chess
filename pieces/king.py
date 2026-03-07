@@ -3,3 +3,4 @@ from pieces.piece import Piece
 
 class King(Piece):
     rep = 'K'
+    name = 'king'

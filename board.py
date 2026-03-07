@@ -21,8 +21,14 @@ def generate_board(white: Player, black: Player):
 
 
 def display_board(board):
-    for row in board:
-        print(row)
+    for row_num, row in enumerate(board):
+        print((8-row_num), ' ', row)
+
+    col_letters_display_list = []
+    for letter in col_letters.keys():
+        col_letters_display_list.append(letter + ' ')
+    
+    print('\n   ', col_letters_display_list)
 
 
 def on_board(x: int, y: int) -> bool:

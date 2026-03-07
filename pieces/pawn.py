@@ -4,8 +4,7 @@ from pieces.piece import Piece
 
 class Pawn(Piece):
     rep = 'p'
-    # potential_moves = [[0, 1], [0, 2], [-1, 1], [1, 1]]     # Potential moves relative to piece's current location
-
+    name = 'pawn'
 
     def update_valid_moves(self, player, opponent):
         # Reset possible moves

@@ -33,7 +33,7 @@ def handle_turn(player: Player, opponent: Player) -> bool:
         target_piece = get_piece_at_square(opponent.pieces, target_col, target_row)
         if not target_piece.captured:
             target_piece.captured = True
-            print(f"Captured opponent's {target_piece.rep}")
+            print(f"Captured opponent's {target_piece.name}")
         return True
     else:
         print('Invalid move. Try again.')
