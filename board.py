@@ -32,7 +32,7 @@ def display_board(board):
 
 
 def on_board(x: int, y: int) -> bool:
-    upper = 7
+    upper = 8
     lower = 0
 
     if x in range(lower, upper) and y in range(lower, upper):
