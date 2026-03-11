@@ -64,6 +64,12 @@ def main():
             for piece in player.pieces:
                 piece.update_valid_moves(player, opponent)
 
+                # Printing possible moves for each piece for testing
+                if piece.captured:
+                    print(piece.name, '[CAPTURED]')
+                else:
+                    print(piece.name, piece.possible_moves)
+
             # Get user input
             valid_command = False
             while not valid_command:
