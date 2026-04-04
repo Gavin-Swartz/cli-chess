@@ -1,5 +1,9 @@
 from board import get_piece_at_square, on_board
+from pieces.bishop import Bishop
+from pieces.knight import Knight
 from pieces.piece import Piece
+from pieces.queen import Queen
+from pieces.rook import Rook
 
 
 class Pawn(Piece):
@@ -48,3 +52,34 @@ class Pawn(Piece):
             # Move is valid if an opposing piece is present at diagonal
             if not get_piece_at_square(opponent.pieces, newX, newY).captured:
                 self.possible_moves.append([newX, newY])
+
+
+    def promote_pawn(self, player):
+        # Get pawn coordinates
+        x = self.x
+        y = self.y
+
+        valid = False
+        while not valid:
+            # Get user input
+            user_selection = input(f"({player.color}) Pawn ready for promotion. Enter piece type (N, B, R, Q): ")
+            user_selection = str(user_selection).upper()
+
+            # Create new piece
+            if user_selection == 'N':
+                player.pieces.append(Knight(x, y))
+                valid = True
+            elif user_selection == 'B':
+                player.pieces.append(Bishop(x, y))
+                valid = True
+            elif user_selection == 'R':
+                player.pieces.append(Rook(x, y))
+                valid = True
+            elif user_selection == 'Q':
+                player.pieces.append(Queen(x, y))
+                valid = True
+            else:
+                'Invalid piece. Try again.'
+
+        # Capture to remove pawn
+        self.captured = True

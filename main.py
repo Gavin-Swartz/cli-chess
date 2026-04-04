@@ -1,5 +1,6 @@
 from turn_utils import get_position_from_algebraic_notation, validate_command
 from player import Player
+from pieces.pawn import Pawn
 from setup import instantiate_pieces, instantiate_players
 from board import display_board, generate_board, get_piece_at_square
     
@@ -34,6 +35,11 @@ def handle_turn(player: Player, opponent: Player) -> bool:
         if not target_piece.captured:
             target_piece.captured = True
             print(f"Captured opponent's {target_piece.name}")
+
+        # Check if pawn reached furthest rank from starting position and allow promotion
+        if (type(selected_piece) is Pawn) and selected_piece.y in [0, 7]:
+            selected_piece.promote_pawn(player)
+
         return True
     else:
         print('Invalid move. Try again.')
