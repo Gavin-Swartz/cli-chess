@@ -1,4 +1,5 @@
 from board import get_piece_at_square, on_board
+from turn_utils import get_previously_moved_piece
 from pieces.bishop import Bishop
 from pieces.knight import Knight
 from pieces.piece import Piece
@@ -31,7 +32,7 @@ class Pawn(Piece):
                 self.possible_moves.append([newX, newY])
 
         # Forward 2 squares (path cannot be blocked and must be first move by piece)
-        if len(self.possible_moves) != 0 and self.unmoved:
+        if len(self.possible_moves) != 0 and not self.moves_made:
             newX = self.x
             newY = self.y + (2 * orient)
             if get_piece_at_square(opponent.pieces, newX, newY).captured and get_piece_at_square(player.pieces, newX, newY).captured:
@@ -52,6 +53,22 @@ class Pawn(Piece):
             # Move is valid if an opposing piece is present at diagonal
             if not get_piece_at_square(opponent.pieces, newX, newY).captured:
                 self.possible_moves.append([newX, newY])
+
+        # En passant for either direction
+        newY = self.y
+        for newX in [self.x-1, self.x+1]:
+            if on_board(newX, newY):
+                # TODO check if opponent piece moved two spaces
+                # Check if opponent piece exists, is a pawn, has only moved once, and was the most recently moved piece
+                opponent_piece = get_piece_at_square(opponent.pieces, newX, newY)
+                
+                print(not opponent_piece.captured)
+                print(type(opponent_piece) is Pawn)
+                print(opponent_piece is get_previously_moved_piece())
+                print(opponent_piece.moves_made == 1)
+
+                if (not opponent_piece.captured) and (type(opponent_piece) is Pawn) and (opponent_piece is get_previously_moved_piece()) and (opponent_piece.moves_made == 1):
+                    self.possible_moves.append([newX, newY])
 
 
     def promote_pawn(self, player):

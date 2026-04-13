@@ -1,4 +1,4 @@
-from turn_utils import get_position_from_algebraic_notation, validate_command
+from turn_utils import get_position_from_algebraic_notation, validate_command, set_previously_moved_piece
 from player import Player
 from pieces.pawn import Pawn
 from setup import instantiate_pieces, instantiate_players
@@ -29,6 +29,7 @@ def handle_turn(player: Player, opponent: Player) -> bool:
     # Ensure move is valid for piece type and move
     if [target_col, target_row] in selected_piece.possible_moves:
         selected_piece.move(target_col, target_row)
+        set_previously_moved_piece(selected_piece)
 
         # Capture opponent's piece (if at target)
         target_piece = get_piece_at_square(opponent.pieces, target_col, target_row)

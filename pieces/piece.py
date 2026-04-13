@@ -3,7 +3,7 @@ class Piece:
         self.x = x
         self.y = y
         self.captured = captured
-        self.unmoved: bool = True
+        self.moves_made: int = 0
         self.possible_moves: list[list[int]] = []       # All possible moves by piece, given as absolute board coordinates
 
     def update_valid_moves(self, player, opponent):
@@ -13,6 +13,4 @@ class Piece:
     def move(self, x: int, y: int):
         self.x = x
         self.y = y
-
-        if self.unmoved:
-            self.unmoved = False
+        self.moves_made += 1

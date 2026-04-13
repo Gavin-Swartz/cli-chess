@@ -1,6 +1,14 @@
 from typing import List
 from board import get_col_letters, get_column_index_from_alpha_char
 
+previously_moved_piece = None
+def get_previously_moved_piece():
+    return previously_moved_piece
+
+def set_previously_moved_piece(piece):
+    global previously_moved_piece
+    previously_moved_piece = piece
+
 
 def validate_command(parsed_command: List[str]) -> bool:
     # Command should have exactly 2 arguments
