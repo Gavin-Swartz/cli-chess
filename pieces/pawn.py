@@ -58,16 +58,13 @@ class Pawn(Piece):
         newY = self.y
         for newX in [self.x-1, self.x+1]:
             if on_board(newX, newY):
-                # TODO check if opponent piece moved two spaces
-                # Check if opponent piece exists, is a pawn, has only moved once, and was the most recently moved piece
                 opponent_piece = get_piece_at_square(opponent.pieces, newX, newY)
-                
-                print(not opponent_piece.captured)
-                print(type(opponent_piece) is Pawn)
-                print(opponent_piece is get_previously_moved_piece())
-                print(opponent_piece.moves_made == 1)
 
-                if (not opponent_piece.captured) and (type(opponent_piece) is Pawn) and (opponent_piece is get_previously_moved_piece()) and (opponent_piece.moves_made == 1):
+                y_pos_move_two = [3, 4]     # Possible y-values of a pawn that just moved two squares
+                just_moved_two = (opponent_piece is get_previously_moved_piece()) and (opponent_piece.moves_made == 1) and (opponent_piece.y in y_pos_move_two)
+
+                # Check if opponent piece exists, is a pawn, has only moved once, and was the most recently moved piece
+                if (not opponent_piece.captured) and (type(opponent_piece) is Pawn) and just_moved_two:
                     self.possible_moves.append([newX, newY])
 
 
