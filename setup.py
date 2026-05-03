@@ -8,11 +8,6 @@ from player import Player
 
 
 def instantiate_pieces(white: Player, black: Player):
-    # Create pawns
-    for column in range(8):
-        white.pieces.append(Pawn(column, 6))
-        black.pieces.append(Pawn(column, 1))
-
     # Create kings
     white.pieces.append(King(4, 7))
     black.pieces.append(King(4, 0))
@@ -35,6 +30,11 @@ def instantiate_pieces(white: Player, black: Player):
     for column in [2, 5]:
         white.pieces.append(Bishop(column, 7))
         black.pieces.append(Bishop(column, 0))
+
+    # Create pawns
+    for column in range(8):
+        white.pieces.append(Pawn(column, 6))
+        black.pieces.append(Pawn(column, 1))
 
 
 def instantiate_players():

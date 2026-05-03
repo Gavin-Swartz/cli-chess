@@ -5,3 +5,4 @@ class Player():
     def __init__(self, color_char: str):
         self.color = color_char
         self.pieces: list[Piece] = []
+        self.in_check: bool = False

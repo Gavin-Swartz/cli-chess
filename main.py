@@ -67,7 +67,21 @@ def main():
             opponent_index = (players.index(player) + 1) % 2
             opponent = players[opponent_index]
 
-            # Get all validate movements for all pieces
+            # Get all valid movements for opponent player's pieces
+            for piece in opponent.pieces:
+                piece.update_valid_moves(opponent, player)
+
+                # Printing possible moves for each piece for testing
+                if piece.captured:
+                    print(piece.name, '[CAPTURED]')
+                else:
+                    print(piece.name, piece.possible_moves)
+
+            print("------------------------------------------")
+            print("CURRENT PLAYER'S PIECES")
+            print("------------------------------------------")
+
+            # Get all valid movements for current player's pieces
             for piece in player.pieces:
                 piece.update_valid_moves(player, opponent)
 

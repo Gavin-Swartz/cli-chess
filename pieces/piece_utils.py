@@ -16,3 +16,13 @@ def validate_rook_bishop_squares(player, opponent, x, y, piece):
         else:
             piece.possible_moves.append([x, y])
             return True
+
+
+def validate_free_square_for_king(opponent, x, y):
+    for piece in opponent.pieces:
+        # If target square is possible for opponent, it is invalid for king
+        if [x, y] in piece.possible_moves:
+            return False
+
+    # Square cannot be moved to by opponent
+    return True
